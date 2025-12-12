@@ -2,26 +2,6 @@ loadstring([[
 local player = game.Players.LocalPlayer
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
-local LocalizationService = game:GetService("LocalizationService")
-
--- Detectar idioma del jugador
-local playerLocale = LocalizationService.RobloxLocaleId:sub(1,2) -- "es", "en", etc.
-local texts = {}
-
-if playerLocale == "es" then
-    texts.Activate = "Activar"
-    texts.Deactivate = "Desactivar"
-    texts.Title = "Ken Hub"
-elseif playerLocale == "en" then
-    texts.Activate = "Activate"
-    texts.Deactivate = "Deactivate"
-    texts.Title = "Ken Hub"
-else
-    -- Idioma por defecto
-    texts.Activate = "Activate"
-    texts.Deactivate = "Deactivate"
-    texts.Title = "Ken Hub"
-end
 
 local function createGUI()
     if player.PlayerGui:FindFirstChild("PersistentHUD") then return end
@@ -31,7 +11,7 @@ local function createGUI()
     ScreenGui.ResetOnSpawn = false
     ScreenGui.Parent = player:WaitForChild("PlayerGui")
 
-    -- Panel blanco y azul
+    -- Panel white and blue
     local Frame = Instance.new("Frame")
     Frame.Size = UDim2.new(0,240,0,140)
     Frame.Position = UDim2.new(0.5,-120,0.5,-70)
@@ -49,18 +29,18 @@ local function createGUI()
     FrameShadow.Thickness = 2
     FrameShadow.Parent = Frame
 
-    -- Texto Ken Hub
+    -- Title AUTO TRAIN
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1,0,0,30)
     Title.Position = UDim2.new(0,0,0,5)
     Title.BackgroundTransparency = 1
-    Title.Text = texts.Title
+    Title.Text = "AUTO TRAIN"
     Title.TextColor3 = Color3.fromRGB(0,120,255)
     Title.Font = Enum.Font.GothamBold
     Title.TextSize = 20
     Title.Parent = Frame
 
-    -- Animación pulsar usando UIScale
+    -- Press animation using UIScale
     local function addPressAnimation(button)
         local scale = Instance.new("UIScale")
         scale.Parent = button
@@ -74,11 +54,11 @@ local function createGUI()
         end)
     end
 
-    -- Botones Activar / Desactivar
+    -- Buttons Activate / Deactivate
     local ActivateButton = Instance.new("TextButton")
     ActivateButton.Size = UDim2.new(0,100,0,50)
     ActivateButton.Position = UDim2.new(0.25,-50,0.5,10)
-    ActivateButton.Text = texts.Activate
+    ActivateButton.Text = "Activate"
     ActivateButton.BackgroundColor3 = Color3.fromRGB(0,120,255)
     ActivateButton.TextColor3 = Color3.fromRGB(255,255,255)
     ActivateButton.Parent = Frame
@@ -90,7 +70,7 @@ local function createGUI()
     local DeactivateButton = Instance.new("TextButton")
     DeactivateButton.Size = UDim2.new(0,100,0,50)
     DeactivateButton.Position = UDim2.new(0.75,-50,0.5,10)
-    DeactivateButton.Text = texts.Deactivate
+    DeactivateButton.Text = "Deactivate"
     DeactivateButton.BackgroundColor3 = Color3.fromRGB(100,180,255)
     DeactivateButton.TextColor3 = Color3.fromRGB(255,255,255)
     DeactivateButton.Parent = Frame
@@ -118,7 +98,7 @@ local function createGUI()
         activating = false
     end)
 
-    -- Botón cerrar X
+    -- Close button X
     local CloseButton = Instance.new("TextButton")
     CloseButton.Text = "X"
     CloseButton.Size = UDim2.new(0,25,0,25)
@@ -136,7 +116,7 @@ local function createGUI()
         ScreenGui:Destroy()
     end)
 
-    -- Botón flotante circular
+    -- Floating circular button
     local OpenButton = Instance.new("ImageButton")
     OpenButton.Size = UDim2.new(0,55,0,55)
     OpenButton.Position = UDim2.new(0.5,-27,0.5,-200)
@@ -152,7 +132,7 @@ local function createGUI()
     OpenShadow.Parent = OpenButton
     addPressAnimation(OpenButton)
 
-    -- Función para mover objetos
+    -- Make objects draggable
     local function makeDraggable(guiObject)
         local dragging = false
         local dragInput
@@ -193,7 +173,7 @@ local function createGUI()
     makeDraggable(OpenButton)
     makeDraggable(Frame)
 
-    -- Click para abrir/ocultar panel
+    -- Open / hide panel
     OpenButton.MouseButton1Click:Connect(function()
         if not dragging then
             Frame.Visible = not Frame.Visible
@@ -201,10 +181,10 @@ local function createGUI()
     end)
 end
 
--- Crear GUI inicial
+-- Create initial GUI
 createGUI()
 
--- Persistir al respawnear
+-- Persist on respawn
 player.CharacterAdded:Connect(function()
     createGUI()
 end)
